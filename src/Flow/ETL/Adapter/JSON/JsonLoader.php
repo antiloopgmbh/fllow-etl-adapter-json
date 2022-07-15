@@ -29,9 +29,14 @@ final class JsonLoader implements Closure, Loader
 
     private FileStream $stream;
 
+    /**
+     * @var false
+     */
+    private bool $safeMode;
+
     public function __construct(
-        FileStream|string $stream,
-        private bool $safeMode = false
+        $stream,
+        $safeMode = false
     ) {
         if (\is_string($stream)) {
             $this->stream = new LocalFile($stream);
@@ -40,6 +45,7 @@ final class JsonLoader implements Closure, Loader
         }
 
         $this->handler = $this->safeMode ? Handler::directory('json') : Handler::file();
+        $this->safeMode = $safeMode;
     }
 
     public function __serialize() : array

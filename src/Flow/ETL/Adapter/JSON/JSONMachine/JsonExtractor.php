@@ -19,17 +19,21 @@ use JsonMachine\Items;
 final class JsonExtractor implements Extractor
 {
     private FileStream $stream;
+    private int $rowsInBatch;
+    private string $rowEntryName;
 
     public function __construct(
-        FileStream|string $stream,
-        private readonly int $rowsInBatch = 1000,
-        private readonly string $rowEntryName = 'row'
+        $stream,
+        int $rowsInBatch = 1000,
+        string $rowEntryName = 'row'
     ) {
         if (\is_string($stream)) {
             $this->stream = new LocalFile($stream);
         } else {
             $this->stream = $stream;
         }
+        $this->rowsInBatch = $rowsInBatch;
+        $this->rowEntryName = $rowEntryName;
     }
 
     public function extract() : \Generator

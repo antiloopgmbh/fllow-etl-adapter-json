@@ -6,9 +6,9 @@
     "prefer-stable": true,
     "minimum-stability": "dev",
     "require": {
-        "php": "~8.1",
+        "php": ">=7.4",
         "ext-json": "*",
-        "flow-php/etl": "^1.0@dev",
+        "flow-php/etl": "dev-php7.4-backport",
         "halaxa/json-machine": "^0.8.0 || ^1.0.0"
     },
     "config": {
@@ -49,5 +49,11 @@
         "post-update-cmd": [
             "@tools:install"
         ]
-    }
+    },
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/antiloopgmbh/flow-etl"
+        }
+    ]
 }

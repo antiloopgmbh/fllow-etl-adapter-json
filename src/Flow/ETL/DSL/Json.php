@@ -19,7 +19,7 @@ class Json
      *
      * @return Extractor
      */
-    public static function from(string|FileStream|array $stream, int $rows_in_batch = 1000, string $row_entry_name = 'row') : Extractor
+    public static function from($stream, int $rows_in_batch = 1000, string $row_entry_name = 'row') : Extractor
     {
         if (\is_array($stream)) {
             $extractors = [];
@@ -48,7 +48,7 @@ class Json
      *
      * @return Loader
      */
-    public static function to(string|FileStream $stream, bool $safe_mode = false) : Loader
+    public static function to($stream, bool $safe_mode = false) : Loader
     {
         return new JsonLoader($stream, $safe_mode);
     }
